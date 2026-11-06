@@ -1,0 +1,68 @@
+<%- layout("./layouts/boilerplate") %>
+<body>
+  <div class="row">
+    <div class="col-8 offset-2">
+    <br><br>
+    <h2>Create Your New List Here!</h2>
+    
+    <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+      <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input placeholder="Add catchy Title" name="listing[title]" class="form-control" required>
+      <div class="valid-feedback">Looks good!!</div>
+      <div class="invalid-feedback">Enter valid Title</div>
+      </div>
+      <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea rows="3" cols="8" name="listing[description]" class="form-control" required>About place</textarea>
+      <div class="valid-feedback">Looks good!!</div>
+      <div class="invalid-feedback">Enter short description</div>
+      </div>
+      <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input placeholder="1200" name="listing[price]" class="form-control" required>
+      <div class="valid-feedback">Looks good!!</div>
+      <div class="invalid-feedback">Enter valid Price</div>
+      </div>
+      <div class="mb-3">
+      <label for="image" class="form-label">Upload Image</label>
+      <input name="listing[image][url]" type="file" class="form-control">
+      </div>
+      <div class="mb-3">
+        <div class="form-field">
+  <label for="category" class="form-label">Category</label>
+  <select class="form-control" id="category" name="listing[category]">
+    <option>Select One from Following…</option>
+    <option value="Farms">Farms</option>
+    <option value="Trending">Trending</option>
+    <option value="Pools">Pools</option>
+    <option value="Arctic">Arctic</option>
+    <option value="Sunny">Sunny</option>
+    <option value="Mountains">Mountains</option>
+    <option value="Beach">Beach</option>
+    <option value="Bed">Bed</option>
+    <option value="Homes">Homes</option>
+    <option value="Ships">Ships</option>
+    <option value="Castles">Castles</option>
+  </select>
+</div>
+      </div>
+      <div class="mb-3">
+      <label for="location" class="form-label">Location</label>
+      <input placeholder="Jaipur" name="listing[location]" class="form-control" required>
+      <div class="valid-feedback">Looks good!!</div>
+      <div class="invalid-feedback">Enter valid Location</div>
+      </div>
+      <div class="mb-3">
+      <label for="country" class="form-label">country</label>
+      <input placeholder="India" name="listing[country]" class="form-control" required>
+      <div class="valid-feedback">Looks good!!</div>
+      <div class="invalid-feedback">Enter valid Country</div>
+      </div>
+    
+      <button type="submit" class="btn btn-dark">Submit</button>
+      <br><br>
+    </form>
+</div>
+</div>
+</body>
