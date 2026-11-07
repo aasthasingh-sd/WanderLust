@@ -22,11 +22,10 @@ window.mapToken = "<%= process.env.MAP_TOKEN %>";
 </div>
 <% if(currUser && currUser._id.equals(list.owner._id)) {%>
     <div class=" btns">
-    <a href="/listings/<%=list._id%>/edit" class="btn btn-dark col-1  offset-3 edit-btn ">Edit </a>
-    <br>
-    <br>
+    <a href="/listings/<%=list._id%>/edit" class="btn btn-dark edit-btn">Edit </a>
+  
     <form method="post" action="/listings/<%=list._id%>?_method=DELETE">
-       <button class="btn btn-dark offset-5">Delete</button>
+       <button class="btn btn-danger offset-5">Delete</button>
     </form>
     </div>
 <%}%>
@@ -58,7 +57,7 @@ window.mapToken = "<%= process.env.MAP_TOKEN %>";
       </div>
       <div class="invalid-feedback">Please add some comments for review</div>
       <br>
-      <button class="btn btn-outline">Submit</button>
+      <button class="btn btn-dark">Submit</button>
       </form>
       <%}%>
     </div>
@@ -69,7 +68,7 @@ window.mapToken = "<%= process.env.MAP_TOKEN %>";
     <% for (review of list.reviews) {%>
       <div class="card col-5 ms-3 mb-3">
         <div class="card-body">
-          <h5 class="card-title"><%= list.owner.username%></h5>
+          <h5 class="card-title"><%= currUser.username%></h5>
           <p class="card-text"><%= review.comment%></p>
            <p class="starability-result  card-text" data-rating="<%= review.rating%>"></p>
            <form class="mb-3" action="/listings/<%= list._id%>/reviews/<%=review._id%>?_method=DELETE" method="post">
