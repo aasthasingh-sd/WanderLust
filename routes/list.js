@@ -8,6 +8,9 @@ const { listingSchema } = require("../schema");
 const multer  = require('multer');
 const { storage } = require("../cloudConfig");
 const upload = multer({storage});
+
+//navbar route
+router.get("/search", wrapAsync(listingController.nav));
 //Index Route
 router.get("/", wrapAsync(listingController.index));
 //New Route
