@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use(methodOverride("_method"));
 app.engine('ejs',ejsMate);
 
+const port = process.env.PORT || 8080;
 const dbUrl = process.env.ATLAS_DB;
 main()
 .then(()=>{
@@ -36,9 +37,6 @@ async function main(){
     await mongoose.connect(dbUrl);
 }
 
-app.get("/",(req,res)=>{
-    console.log("root is working");
-});
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto:{
@@ -88,7 +86,11 @@ app.use((err, req,res,next) =>{
     res.status(statusCode).render("./listings/error.ejs" , { message });
 });
 
+app.get("/", (req, res) => {
+    res.send("WanderLust is running!");
+});
 
-app.listen(8080,()=>{
-    console.log("port is running on server 8080");
+
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server is running on port ${port}`);
 });
