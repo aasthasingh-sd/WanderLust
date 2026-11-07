@@ -139,3 +139,25 @@ body{
  .main-bar{
    font-size: 1.3rem;
  }
+.btns {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.edit-btn {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px 25px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}

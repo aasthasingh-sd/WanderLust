@@ -8,12 +8,35 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
+module.exports.nav = async (req, res) => {
+    let { location } = req.query;
+    if(location == ""){
+        req.flash("error","Location not found!");
+    }else{
+    let filter = {};
+
+    if (location) {
+        filter.location = {
+            $regex: location,
+            $options: "i"
+        };
+    }
+
+    let lists = await listing.find(filter);
+
+    res.render("./listings/index.ejs", {
+        lists,
+        selectedLocation: location
+    });}
+};
+
 module.exports.index = async (req, res) => {
     let { category } = req.query;
     let filter ={};
     if(category){
         filter.category = category;
     }
+   
     let lists = await listing.find(filter);
     res.render("./listings/index.ejs", { lists,selectedCategory: category });
 };
