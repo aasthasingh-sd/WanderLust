@@ -1,24 +1,39 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 const initData = require("./data");
-const listing = require("../models/listings");
+const Listing = require("../models/listings");
 
-main()
-.then(() =>{
-    console.log("connection successful");
-}).catch(err =>{
-    console.log(err);
-});
+const dbUrl = process.env.ATLAS_DB;
+const ownerId = '6aed95c95689c4d93aa4a129';
 
-async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/airbnb");
-}
+const initDB = async () => {
+    await Listing.deleteMany({});
 
-const initDB = async() =>{
-    await listing.deleteMany({});
-    
-    initData.data = initData.data.map((obj)=>({...obj,owner:'6adc862714075e6523aac922'})
-    );
-    await listing.insertMany(initData.data);
-    console.log("data was initialized");
-}
-initDB();
+    initData.data = initData.data.map((obj) => ({
+        ...obj,
+        owner: new mongoose.Types.ObjectId(ownerId)
+    }));
+
+    await Listing.insertMany(initData.data);
+
+    console.log("Sample listings initialized successfully!");
+};
+
+const main = async () => {
+    try {
+        await mongoose.connect(dbUrl);
+        console.log("MongoDB connected successfully!");
+
+        await initDB();
+
+    } catch (err) {
+        console.error("Initialization failed:", err);
+
+    } finally {
+        await mongoose.connection.close();
+        console.log("Database connection closed.");
+    }
+};
+
+main();

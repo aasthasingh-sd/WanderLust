@@ -87,7 +87,7 @@ app.use((err, req,res,next) =>{
 });
 
 app.get("/", (req, res) => {
-    res.send("WanderLust is running!");
+   res.redirect("/listings");
 });
 
 
